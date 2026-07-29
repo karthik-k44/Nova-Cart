@@ -49,11 +49,17 @@ export const useCartStore = create<CartState>()(
         })),
       decreaseQuantity: (productId) =>
         set((state) => ({
-          items: state.items.map((i) =>
-            i.product.id === productId
-              ? { ...i, quantity: Math.max(i.quantity - 1, MIN_QUANTITY) }
-              : i
-          ),
+          items: state.items.flatMap((item) => {
+            if (item.product.id !== productId) return item;
+
+            if (item.quantity === 1) {
+              return [];
+            }
+            return {
+              ...item,
+              quantity: item.quantity - 1,
+            };
+          }),
         })),
       setQuantity: (productId, quantity) =>
         set((state) => ({
