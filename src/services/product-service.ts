@@ -3,7 +3,7 @@ import { apiClient } from './api';
 
 
 export const fetchProducts = async (): Promise<ProductsResponse> => {
-  const raw = await apiClient<unknown>('/products?limit=100');
+  const raw = await apiClient<unknown>('/products?limit=200');
   const parsed = productsResponseSchema.parse(raw);
   return parsed;
 }

@@ -6,7 +6,7 @@ import { Check, ShoppingCart, Star } from "lucide-react";
 import Button from "../button";
 import Card from "../card";
 import { CN, FormatCurrency } from "../../utils";
-import Badge from "../badge";
+// import Badge from "../badge";
 
 interface ProductCardProps {
   product: Product;
@@ -41,9 +41,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
             zoom && "scale-110",
           )}
         />
-        <div className="absolute left-3 top-3">
+        {/* <div className="absolute left-3 top-3">
           <Badge>{product.category}</Badge>
-        </div>
+        </div> */}
       </Link>
 
       <div className="flex flex-1 flex-col p-4">

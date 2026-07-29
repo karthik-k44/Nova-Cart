@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { useFilters } from "../../hooks";
 import Container from "../../components/container";
 import SearchBar from "../../components/searchbar";
 import Button from "../../components/button";
-import { PackageOpen, SlidersHorizontal, X } from "lucide-react";
+import { PackageOpen } from "lucide-react";
 import { useProducts } from "../../hooks/useProducts";
 import SortFilter from "../../components/filters/sort-filter";
 import PriceFilter from "../../components/filters/price-filter";
@@ -26,69 +25,48 @@ const HomePage = () => {
      clearFilters,
    } = useFilters(data?.products || []);
 
-   const [showFilters, setShowFilters] = useState(false);
   return (
     <div className="">
-      <Container className="py-8">
-        <div className="mb-8">
+      <Container className="py-4">
+        {/* <div className="mb-4">
           <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl">
             Discover products
           </h1>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
             Curated essentials, delivered with care.
           </p>
-        </div>
+        </div> */}
 
-        <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="mb-4 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-md flex-1">
             <SearchBar value={filters.search} onChange={setSearch} />
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 hover:cursor-pointer">
+            <p className="text-xs text-gray-500 dark:text-gray-400 hidden lg:block">
+              {filtered.length} {filtered.length === 1 ? "product" : "products"}
+            </p>
             <SortFilter value={filters.sort} onChange={setSort} />
-            <Button
-              variant="outline"
-              size="sm"
-              className="lg:hidden"
-              onClick={() => setShowFilters((s) => !s)}
-            >
-              <SlidersHorizontal className="h-4 w-4" />
-              Filters
-            </Button>
+            <p className="text-xs text-gray-500 dark:text-gray-400 lg:hidden">
+              {filtered.length} {filtered.length === 1 ? "product" : "products"}
+            </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[220px_1fr]">
-          <aside
-            className={`${showFilters ? "block" : "hidden"} space-y-6 lg:block`}
-          >
-            <div className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-gray-200/60 dark:bg-gray-900 dark:ring-gray-800">
-              <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-sm font-semibold text-gray-900 dark:text-white">
-                  Filters
-                </h2>
-                <button
-                  onClick={clearFilters}
-                  className="text-xs font-medium text-indigo-600 hover:text-indigo-700 dark:text-indigo-400"
-                >
-                  Clear all
-                </button>
-              </div>
-              <div className="space-y-5">
-                <div>
-                  <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500">
-                    Category
-                  </h3>
-                  <CategoryFilter
-                    categories={categories}
-                    value={filters.category}
-                    onChange={setCategory}
-                  />
-                </div>
-                <PriceFilter value={filters.maxPrice} onChange={setMaxPrice} />
-              </div>
+        <aside className="space-y-6 lg:block mb-4">
+          <div className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-gray-200/60 dark:bg-gray-900 dark:ring-gray-800">
+            <div className="space-y-4">
+              <CategoryFilter
+                categories={categories}
+                value={filters.category}
+                onChange={setCategory}
+                onClick={clearFilters}
+              />
+              <PriceFilter value={filters.maxPrice} onChange={setMaxPrice} />
             </div>
-          </aside>
+          </div>
+        </aside>
 
+        <div className="grid grid-cols-1 gap-8">
           <div>
             {isLoading ? (
               <ProductGridSkeleton />
@@ -110,28 +88,11 @@ const HomePage = () => {
               />
             ) : (
               <>
-                <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-                  {filtered.length}{" "}
-                  {filtered.length === 1 ? "product" : "products"}
-                </p>
                 <ProductGrid products={filtered} />
               </>
             )}
           </div>
         </div>
-
-        {showFilters && (
-          <div className="mt-4 flex justify-end lg:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowFilters(false)}
-            >
-              <X className="h-4 w-4" />
-              Close filters
-            </Button>
-          </div>
-        )}
       </Container>
     </div>
   );
