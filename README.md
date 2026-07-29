@@ -1,6 +1,9 @@
-# NovaCart — Modern Shopping Cart Platform
+# NovaCart — Modern Shopping Cart Platform 
 
 A production-quality e-commerce front end built with React, TypeScript, Zustand, TanStack Query, and Zod. NovaCart demonstrates clean architecture, reusable components, validated API data, and a polished, accessible UI inspired by Shopify, Apple Store, and Nike.
+
+## Deployed URL 
+https://nova-cart-xi-vert.vercel.app/
 
 ## Project Overview
 
@@ -285,4 +288,3 @@ The app is a static SPA and deploys to Vercel (or any static host) with no confi
 
 ## Screenshots
 
-> Add screenshots of the home, cart, checkout, and success pages here.
