@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #4F46E5;
+}
+
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -8,4 +14,9 @@ html {
 body {
   font-family: ui-sans-serif, system-ui, sans-serif;
   color: rgb(17 24 39);
+}
+
+body.dark {
+  color: rgb(229 231 235);
+  background-color: rgb(17 24 39);
 }
