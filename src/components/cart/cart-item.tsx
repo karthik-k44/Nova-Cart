@@ -44,6 +44,7 @@ const CartItems:React.FC<CartItemProps> = ({
             quantity={item.quantity}
             onIncrease={() => increase(item.product.id)}
             onDecrease={() => decrease(item.product.id)}
+            max={item.product.stock}
           />
           <button
             onClick={() => remove(item.product.id)}

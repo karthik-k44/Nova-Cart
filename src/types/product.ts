@@ -24,3 +24,11 @@ export interface Product {
   images: string[];
   thumbnail: string;
 }
+
+export const StockConditionValue = {
+  IN_STOCK: 'In Stock',
+  OUT_OF_STOCK: 'Out of Stock',
+  LOW_STOCK: 'Low Stock',
+} as const;
+export type StockConditionType = (typeof StockConditionValue)[keyof typeof StockConditionValue]
+
