@@ -4,9 +4,12 @@ import { ShoppingBag, ShoppingCart } from 'lucide-react';
 import { NAV_LINKS } from '../../constants';
 import { CN } from '../../utils/helper.ts';
 import ThemeToggle from '../themetoggle';
+import { useCartStore } from '../../store/cart-store.ts';
 
 const Navbar = () => {
-   const itemCount = 0
+   const itemCount = useCartStore((state) =>
+     state.items.reduce((sum, i) => sum + i.quantity, 0),
+   );
   return (
     <header className="sticky top-0 z-40 border-b border-gray-200 bg-white/80 backdrop-blur-md dark:border-gray-800 dark:bg-black">
       <Container className="flex h-16 items-center justify-between">
