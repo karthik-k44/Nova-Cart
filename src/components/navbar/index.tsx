@@ -1,8 +1,6 @@
 import Container from '../container';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ShoppingBag, ShoppingCart } from 'lucide-react';
-import { NAV_LINKS } from '../../constants';
-import { CN } from '../../utils/helper.ts';
 import ThemeToggle from '../themetoggle';
 import { useCartStore } from '../../store/cart-store.ts';
 
@@ -21,26 +19,6 @@ const Navbar = () => {
             NovaCart
           </span>
         </Link>
-
-        <nav className="hidden items-center gap-1 sm:flex">
-          {NAV_LINKS.map((link) => (
-            <NavLink
-              key={link.path}
-              to={link.path}
-              end={link.path === "/"}
-              className={({ isActive }) =>
-                CN(
-                  "rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-200",
-                  isActive
-                    ? "text-indigo-600 dark:text-indigo-400"
-                    : "text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white",
-                )
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </nav>
 
         <div className="flex items-center gap-1">
           <ThemeToggle />

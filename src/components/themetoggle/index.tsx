@@ -15,7 +15,7 @@ const ThemeToggle:React.FC<ThemeToggleProps> = ({
       type="button"
       onClick={toggleTheme}
       className={CN(
-        "flex h-10 w-10 items-center justify-center rounded-xl text-gray-700 transition-colors duration-200 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800",
+        "flex h-10 hover:cursor-pointer w-10 items-center justify-center rounded-xl text-gray-700 transition-colors duration-200 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800",
         className,
       )}
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
