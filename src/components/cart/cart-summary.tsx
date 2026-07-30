@@ -74,6 +74,7 @@ const CartSummary:React.FC<CartSummaryProps> = ({
           <Link to="/checkout">
             <Button
               className="w-full"
+              size='sm'
               disabled={belowMinimum || items.length === 0}
             >
               Checkout
@@ -81,9 +82,9 @@ const CartSummary:React.FC<CartSummaryProps> = ({
           </Link>
           {items.length > 0 && (
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
-              className="w-full"
+              className="mt-2 w-full"
               onClick={clearCart}
             >
               Clear cart

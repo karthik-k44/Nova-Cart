@@ -12,7 +12,7 @@ interface QuantitySelectorProps {
 
 const QuantitySelector:React.FC<QuantitySelectorProps> = ({
   quantity,
-  min = 1,
+  min = 0,
   max = 10,
   onIncrease,
   onDecrease,
@@ -28,7 +28,7 @@ const QuantitySelector:React.FC<QuantitySelectorProps> = ({
         disabled={atMin}
         aria-label="Decrease quantity"
         className={CN(
-          "flex items-center justify-center rounded-l-xl text-gray-600 transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40",
+          "flex items-center hover:cursor-pointer justify-center rounded-l-xl text-gray-600 transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40",
           btn,
         )}
       >
@@ -47,7 +47,7 @@ const QuantitySelector:React.FC<QuantitySelectorProps> = ({
         disabled={atMax}
         aria-label="Increase quantity"
         className={CN(
-          "flex items-center justify-center rounded-r-xl text-gray-600 transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40",
+          "flex items-center justify-center hover:cursor-pointer rounded-r-xl text-gray-600 transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40",
           btn,
         )}
       >
