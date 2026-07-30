@@ -1,4 +1,4 @@
-import { ShoppingBag } from 'lucide-react';
+import { ArrowLeft, ShoppingBag } from 'lucide-react';
 import Container from '../../components/container';
 import EmptyState from '../../components/empty-state';
 import { useCartStore } from '../../store/cart-store';
@@ -28,9 +28,18 @@ const CartPage = () => {
 
   return (
     <Container className="py-4">
-      <h1 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Almost Yours
-      </h1>
+      <div className='w-full flex justify-between'>
+        <h1 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          Almost Yours
+        </h1>
+        <Link
+          to="/"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 dark:hover:text-gray-200"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to shopping
+        </Link>
+      </div>
       <div className="flex h-[calc(100vh-8rem)] flex-col gap-8 lg:h-auto lg:flex-row lg:items-start">
         <div className="flex-1 divide-y divide-gray-100 overflow-y-auto rounded-xl bg-white px-6 py-2 shadow-sm ring-1 ring-gray-200/60 scrollbar-none dark:divide-gray-800 dark:bg-gray-900 dark:ring-gray-800 lg:h-[calc(100vh-15rem)]">
           {items.map((item) => (

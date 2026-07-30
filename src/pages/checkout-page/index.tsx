@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCartStore } from '../../store/cart-store';
 import type { CheckoutStep, Shipping } from '../../types';
 import Container from '../../components/container';
 import EmptyState from '../../components/empty-state';
-import { ShoppingBag } from 'lucide-react';
+import { ArrowLeft, ShoppingBag } from 'lucide-react';
 import Button from '../../components/button';
 import CheckoutStepper from '../../components/checkout/checkout-stepper';
 import CartItems from '../../components/cart/cart-item';
@@ -61,23 +61,34 @@ const CheckOutPage = () => {
   };
 
   return (
-    <Container className="py-8">
-      <h1 className="mb-8 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-        Checkout
-      </h1>
+    <Container className="py-4">
+      <div className="mb-4 flex w-full items-center justify-between">
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          One Last Step
+        </h1>
+        <Link
+          to="/cart"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900 dark:hover:text-gray-200"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to cart
+        </Link>
+      </div>
 
-      <div className="mb-10 max-w-2xl">
-        <CheckoutStepper steps={STEPS} current={step} completed={completed} />
+      <div className=" mb-4 flex justify-center items-center">
+        <div className="w-full max-w-6xl">
+          <CheckoutStepper steps={STEPS} current={step} completed={completed} />
+        </div>
       </div>
 
       {step === "cart" && (
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_360px]">
-          <div className="divide-y divide-gray-100 rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200/60 dark:divide-gray-800 dark:bg-gray-900 dark:ring-gray-800">
+        <div className="flex h-[calc(100vh-10rem)] flex-col gap-8 lg:flex-row">
+          <div className="flex-1 divide-y divide-gray-100 overflow-y-auto rounded-xl bg-white px-6 py-2 shadow-sm ring-1 ring-gray-200/60 scrollbar-none dark:divide-gray-800 dark:bg-gray-900 dark:ring-gray-800">
             {items.map((item) => (
               <CartItems key={item.product.id} item={item} />
             ))}
           </div>
-          <div className="lg:sticky lg:top-20 lg:self-start">
+          <div className="w-full lg:w-[360px] lg:sticky lg:top-20 lg:self-start">
             <CartSummary showCheckout={false} />
             <Button className="mt-3 w-full" onClick={goToShipping}>
               Continue to shipping
@@ -87,20 +98,22 @@ const CheckOutPage = () => {
       )}
 
       {step === "shipping" && (
-        <div className="max-w-2xl rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200/60 dark:bg-gray-900 dark:ring-gray-800">
-          <h2 className="mb-5 text-lg font-semibold text-gray-900 dark:text-white">
-            Shipping Details
-          </h2>
-          <ShippingForm
-            initial={shipping || undefined}
-            onSubmit={goToPayment}
-            onBack={() => setStep("cart")}
-          />
+        <div className='w-full flex justify-center'>
+          <div className="w-full max-w-2xl rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200/60 dark:bg-gray-900 dark:ring-gray-800">
+            <h2 className="mb-5 text-lg font-semibold text-gray-900 dark:text-white">
+              Shipping Details
+            </h2>
+            <ShippingForm
+              initial={shipping || undefined}
+              onSubmit={goToPayment}
+              onBack={() => setStep("cart")}
+            />
+          </div>
         </div>
       )}
 
       {step === "payment" && shipping && (
-        <PaymentSummary shipping={shipping} onPlaceOrder={placeOrder} />
+        <PaymentSummary shipping={shipping} onPlaceOrder={placeOrder} onBack={()=>setStep("shipping")}/>
       )}
     </Container>
   );
